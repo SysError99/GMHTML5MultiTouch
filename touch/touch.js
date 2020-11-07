@@ -67,8 +67,8 @@ function touchInvoke(roomwidth,roomheight) {
             touchEvent.preventDefault()
         }, false)
     }
-	touch.roomWidth = floor(roomwidth)
-	touch.roomHeight = floor(roomheight)
+	touch.roomWidth = Math.floor(roomwidth)
+	touch.roomHeight = Math.floor(roomheight)
 }
 /**
  * Retreive a touch event.
@@ -124,7 +124,7 @@ function touchX(touchId){
 	if(typeof touchObj !== 'object')
         touchObj = null
     if(touchObj !== null)
-        touchResult = floor((touchObj.x - touchObj.left) / (touchObj.right - touchObj.left) * touch.roomWidth)
+        touchResult = Math.floor((touchObj.x - touchObj.left) / (touchObj.right - touchObj.left) * touch.roomWidth)
     return touchResult
 }
 /**
@@ -138,7 +138,7 @@ function touchY(touchId){
 	if(typeof touchObj !== 'object')
         touchObj = null
     if(touchObj !== null)
-        touchResult = floor((touchObj.y - touchObj.top) / (touchObj.bottom - touchObj.top) * touch.roomHeight)
+        touchResult = Math.floor((touchObj.y - touchObj.top) / (touchObj.bottom - touchObj.top) * touch.roomHeight)
     return touchResult
 }
 /**
