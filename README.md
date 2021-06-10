@@ -13,44 +13,49 @@ Then, put this code:
 ```javascript
 touch_invoke(room_width,room_height); //start touch instance with defined screen resolution.
 
-var touchStartId;
-do{
+var touch_start_id;
+var touch_end_id;
+var touch_move_id;
+
+do {
     // When Touch begins, like mouse_check_button_pressed()
-    touchStartId = touch_start();  //get ID of each touch
-    if(touchStartId > -1){ //if touch exists
-        // Usage Example
-        draw_sprite(test_sprite, 1, touch_x(touchEndId), touch_y(touchEndId));
-        draw_set_font(font_default);
-        draw_text_ext(touch_x(touchEndId),touch_y(touchEndId),string(touchEndId),60, 200)
-    }
-}until(touchStartId < 0);
+    touch_start_id = touch_start();  //get ID of each touch
 
-var touchEndId;
-do{
+    if(touch_start_id > -1){ //if touch exists
+        // Usage Example
+        draw_sprite(spr_test, 1, touch_x(touch_start_id), touch_y(touch_start_id));
+        draw_set_font(font_default);
+        draw_text_ext(touch_x(touch_start_id),touch_y(touch_start_id),string(touch_start_id), 60, 200);
+    }
+} until (touch_start_id < 0);
+
+
+do {
     // When Touch ends, like mouse_check_button_released()
-    touchEndId = touch_end(); //get ID of each touch
-    if(touchEndId > -1){
-        // Usage Example
-        draw_sprite(test_sprit
-        draw_sprite(test_sprite, 2, touch_x(touchEndId), touch_y(touchEndId));
-        draw_set_font(font_default);
-        draw_text_ext(touch_x(touchEndId), touch_y(touchEndId), string(touchEndId),60, 200)
-    }
-}until(touchEndId < 0);
+    touch_end_id = touch_end(); //get ID of each touch
 
-var touchMoveId;
-do{
-    // When Touch continuously happens (holding), like mouse_check_button()
-    touchMoveId = touch_move(); //get ID of each touch
-    if(touchMoveId > -1){
+    if(touch_end_id > -1){
         // Usage Example
-        draw_sprite(test_sprite,0,touch_x(touchMoveId),touch_y(touchMoveId));
+        draw_sprite(spr_test, 2, touch_x(touch_end_id), touch_y(touch_end_id));
         draw_set_font(font_default);
-        draw_text_ext(touch_x(touchMoveId), touch_y(touchMoveId), string(touchMoveId),60, 200)
+        draw_text_ext(touch_x(touch_end_id), touch_y(touch_end_id), string(touch_end_id), 60, 200);
     }
-}until(touchMoveId < 0);
+} until (touch_end_id < 0);
+
+do {
+    // When Touch continuously happens (holding), like mouse_check_button()
+    touch_move_id = touch_move(); //get ID of each touch
+
+    if(touch_move_id > -1){
+        // Usage Example
+        draw_sprite(spr_test,0,touch_x(touch_move_id),touch_y(touch_move_id));
+        draw_set_font(font_default);
+        draw_text_ext(touch_x(touch_move_id), touch_y(touch_move_id), string(touch_move_id), 60, 200);
+    }
+} until (touch_move_id < 0);
 
 touch_clean(); //end touch instance.
+
 ```
 
 ---
@@ -61,51 +66,52 @@ This extenstion only works with one instance. So if you want to use it in multip
 ```javascript
 touch_invoke(room_width,room_height); //start touch instance with defined screen resolution.
 
-var touchStartId;
-do{
-    touchStartId = touch_start();
-    if(touchStartId > -1){
+var touch_start_id;
+var touch_end_id;
+var touch_move_id;
+
+do {
+    touch_start_id = touch_start();
+    if(touch_start_id > -1){
         // Set global values for instances.
-        global.touch_id = touchStartId;
-        global.touch_x = touch_x(touchStartId);
-        global.touch_y = touch_y(touchStartId);
+        global.touch_id = touch_start_id;
+        global.touch_x = touch_x(touch_start_id);
+        global.touch_y = touch_y(touch_start_id);
         // Call instances
         with(obj_joystick){
             event_perform("ev_mouse","ev_left_press");
             // then use global variables
         }
     }
-}until(touchStartId < 0);
+} until (touch_start_id < 0);
 
-var touchEndId;
-do{
-    touchEndId = touch_end();
-    if(touchEndId > -1){
+do {
+    touch_end_id = touch_end();
+    if(touch_end_id > -1){
         // Set global values for instances.
-        global.touch_id = touchStartId;
-        global.touch_x = touch_x(touchStartId);
-        global.touch_y = touch_y(touchStartId);
+        global.touch_id = touch_start_id;
+        global.touch_x = touch_x(touch_start_id);
+        global.touch_y = touch_y(touch_start_id);
         // Call instances
         with(obj_joystick){
             event_perform("ev_mouse","ev_left_release");
         }
     }
-}until(touchEndId < 0);
+} until (touch_end_id < 0);
 
-var touchMoveId;
-do{
-    touchMoveId = touch_move();
-    if(touchMoveId > -1){
+do {
+    touch_move_id = touch_move();
+    if(touch_move_id > -1){
         // Set global values for instances.
-        global.touch_id = touchStartId;
-        global.touch_x = touch_x(touchStartId);
-        global.touch_y = touch_y(touchStartId);
+        global.touch_id = touch_start_id;
+        global.touch_x = touch_x(touch_start_id);
+        global.touch_y = touch_y(touch_start_id);
         // Call instances
         with(obj_joystick){
             event_perform("ev_mouse","ev_left_button);
         }
     }
-}until(touchMoveId < 0);
+} until (touch_move_id < 0);
 
 touch_clean(); //end touch instance.
 ```
