@@ -9,7 +9,7 @@ Only tested on GM:S 1.4, someone please test it on GameMaker: Studio 2!
 
 Compress whole project as `7-Zip` archive, then rename its file extension to `.gmez`.
 
-Then, Import the file to your project, then add a new script in `Step` event, or `Draw` event of an object:
+Then, import the file to your project, then add a new script in `Step` event, or `Draw` event of an object:
 
 Then, put this code:
 ```javascript
